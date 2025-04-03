@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Earnings Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        
+        .header {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .balance-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .balance-title {
+            font-size: 18px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        
+        .balance-amount {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1877f2;
+        }
+        
+        .balance-currency {
+            font-size: 24px;
+            color: #1877f2;
+        }
+        
+        .btn {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #166fe5;
+        }
+        
+        .btn-withdraw {
+            background-color: #42b72a;
+        }
+        
+        .btn-withdraw:hover {
+            background-color: #36a420;
+        }
+        
+        .tasks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .task-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .task-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1877f2;
+        }
+        
+        .task-description {
+            color: #65676b;
+            margin-bottom: 15px;
+        }
+        
+        .task-reward {
+            font-weight: bold;
+            color: #42b72a;
+            margin-bottom: 15px;
+        }
+        
+        .task-btn {
+            width: 100%;
+        }
+        
+        .login-required {
+            font-size: 14px;
+            color: #65676b;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #65676b;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #dddfe2;
+        }
+        
+        @media (max-width: 768px) {
+            .tasks-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav {
+                margin-top: 10px;
+            }
+            
+            .nav a {
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Facebook Earnings</div>
+        <div class="nav">
+            <a href="login.html">Login</a>
+            <a href="withdraw.html">Withdraw</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="balance-card">
+            <div class="balance-title">Your Current Balance</div>
+            <div class="balance-amount">0.00<span class="balance-currency">₦</span></div>
+            <button class="btn btn-withdraw" onclick="window.location.href='login.html?redirect=withdraw'">Withdraw Earnings</button>
+            <div class="login-required">Login required to withdraw</div>
+        </div>
+        
+        <h2 style="margin-bottom: 20px; color: #1c1e21;">Available Tasks</h2>
+        
+        <div class="tasks-container">
+            <div class="task-card">
+                <div class="task-title">Like Facebook Posts</div>
+                <div class="task-description">Like 5 posts from our sponsors and earn money</div>
+                <div class="task-reward">Reward:1000₦ per post</div>
+                <button class="btn task-btn" onclick="window.location.href='login.html?redirect=like'">Start Liking</button>
+                <div class="login-required">Login required to earn</div>
+            </div>
+            
+            <div class="task-card">
+                <div class="task-title">Comment on Posts</div>
+                <div class="task-description">Leave meaningful comments on sponsored posts</div>
+                <div class="task-reward">Reward:100₦ per comment</div>
+                <button class="btn task-btn" onclick="window.location.href='login.html?redirect=comment'">Start Commenting</button>
+                <div class="login-required">Login required to earn</div>
+            </div>
+            
+            <div class="task-card">
+                <div class="task-title">Follow Pages</div>
+                <div class="task-description">Follow our partner pages and earn money</div>
+                <div class="task-reward">Reward: 1500₦ per page</div>
+                <button class="btn task-btn" onclick="window.location.href='login.html?redirect=follow'">Start Following</button>
+                <div class="login-required">Login required to earn</div>
+            </div>
+            
+            <div class="task-card">
+                <div class="task-title">Share Posts</div>
+                <div class="task-description">Share posts to your timeline and earn</div>
+                <div class="task-reward">Reward: 1200₦ per share</div>
+                <button class="btn task-btn" onclick="window.location.href='login.html?redirect=share'">Start Sharing</button>
+                <div class="login-required">Login required to earn</div>
+            </div>
+            
+            <div class="task-card">
+                <div class="task-title">Watch Videos</div>
+                <div class="task-description">Watch sponsored videos to completion</div>
+                <div class="task-reward">Reward: 400₦ per video</div>
+                <button class="btn task-btn" onclick="window.location.href='login.html?redirect=watch'">Start Watching</button>
+                <div class="login-required">Login required to earn</div>
+            </div>
+            
+            <div class="task-card">
+                <div class="task-title">Invite Friends</div>
+                <div class="task-description">Invite your friends to join Facebook Earnings</div>
+                <div class="task-reward">Reward: 2000₦ per friend</div>
+                <button class="btn task-btn" onclick="window.location.href='login.html?redirect=invite'">Start Inviting</button>
+                <div class="login-required">Login required to earn</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 Facebook Earnings Hub. This is not an official Facebook product.</p>
+        <p>Earnings are in Nigerian Naira (₦). Minimum withdrawal amount is 1000₦.</p>
+    </div>
+</body>
+</html>

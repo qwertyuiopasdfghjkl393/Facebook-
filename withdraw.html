@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Earnings - Facebook Earnings Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        
+        .header {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .withdraw-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .withdraw-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1877f2;
+            text-align: center;
+        }
+        
+        .balance-info {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .balance-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1877f2;
+        }
+        
+        .balance-currency {
+            font-size: 24px;
+            color: #1877f2;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #65676b;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #166fe5;
+        }
+        
+        .btn-disabled {
+            background-color: #dddfe2;
+            cursor: not-allowed;
+        }
+        
+        .minimum-amount {
+            color: #65676b;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #65676b;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #dddfe2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Facebook Earnings</div>
+        <div class="nav">
+            <a href="login.html">Login</a>
+            <a href="index.html">Earn</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="withdraw-card">
+            <div class="withdraw-title">Withdraw Your Earnings</div>
+            
+            <div class="balance-info">
+                <div>Available Balance</div>
+                <div class="balance-amount">0.00<span class="balance-currency">₦</span></div>
+            </div>
+            
+            <form id="withdrawForm">
+                <div class="form-group">
+                    <label for="withdraw-method">Withdrawal Method</label>
+                    <select id="withdraw-method" required>
+                        <option value="">Select method</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="airtime">Airtime</option>
+                        <option value="mobile-money">Mobile Money</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="account-details">Account Details</label>
+                    <input type="text" id="account-details" placeholder="Enter account number or phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Amount (₦)</label>
+                    <input type="number" id="amount" min="1000" max="0.00" value="1000" required>
+                    <div class="minimum-amount">Minimum withdrawal: 1,000₦</div>
+                </div>
+                
+                <button type="submit" class="btn" id="withdraw-btn">Request Withdrawal</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 Facebook Earnings Hub. This is not an official Facebook product.</p>
+        <p>Withdrawals are processed within 24-48 hours.</p>
+    </div>
+    
+    <script>
+        document.getElementById('withdrawForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const method = document.getElementById('withdraw-method').value;
+            const accountDetails = document.getElementById('account-details').value;
+            const amount = parseInt(document.getElementById('amount').value);
+            const balance = 1500; // This would normally come from server
+            
+            if (amount < 1000) {
+                alert('Minimum withdrawal amount is 1,000₦');
+                return;
+            }
+            
+            if (amount > balance) {
+                alert('Insufficient balance for this withdrawal');
+                return;
+            }
+            
+            if (confirm(`Confirm withdrawal request:\n\nAmount: ${formatCurrency(amount)}₦\nMethod: ${getMethodName(method)}\nAccount: ${accountDetails}`)) {
+                // In a real app, this would send to server
+                alert('Withdrawal request submitted successfully! You will receive your payment within 24-48 hours.');
+                window.location.href = 'index.html';
+            }
+        });
+        
+        function formatCurrency(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+        function getMethodName(method) {
+            const names = {
+                'bank': 'Bank Transfer',
+                'airtime': 'Airtime',
+                'mobile-money': 'Mobile Money'
+            };
+            return names[method];
+        }
+    </script>
+</body>
+</html>
